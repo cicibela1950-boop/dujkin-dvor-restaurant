@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roko i Cicibela - Ručak i Predstava | Dujkin Dvor</title>
+    
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('[data-hr]').forEach(el => {
+                if (lang === 'hr') {
+                    el.textContent = el.getAttribute('data-hr');
+                } else {
+                    el.textContent = el.getAttribute('data-en');
+                }
+            });
+
+            document.querySelectorAll('[data-placeholder-hr]').forEach(el => {
+                if (lang === 'hr') {
+                    el.placeholder = el.getAttribute('data-placeholder-hr');
+                } else {
+                    el.placeholder = el.getAttribute('data-placeholder-en');
+                }
+            });
+
+            document.querySelectorAll('.lang-flag').forEach(flag => {
+                flag.classList.remove('active');
+            });
+            document.getElementById(lang + '-flag').classList.add('active');
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            background-color: #0a0a0a;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(20,20,20,0.9));
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px) saturate(120%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 2rem;
+        }
+
+        .logo img {
+            height: 76px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.75rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.28s ease, transform 0.28s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #d0d0d0;
+            transform: translateY(-2px);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            position: absolute;
+            right: 2rem;
+        }
+
+        .lang-flag {
+            width: 42px;
+            height: 28px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            opacity: 0.4;
+            filter: grayscale(80%) brightness(0.7);
+            border: 2px solid transparent;
+        }
+
+        .lang-flag:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .lang-flag.active {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .event-hero {
+            position: relative;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('slikr/DSC08391.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .event-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(20,20,20,0.65) 50%, rgba(0,0,0,0.75) 100%);
+            z-index: 0;
+        }
+
+        .event-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 3rem;
+        }
+
+        .event-hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 0 6px 20px rgba(0,0,0,0.9);
+            letter-spacing: 2px;
+        }
+
+        .event-date-hero {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* Content Sections */
+        section {
+            padding: 5rem 4rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .content-section {
+            background-color: #141414;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .content-block h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+        }
+
+        .content-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .content-block p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            color: #d0d0d0;
+            font-weight: 300;
+        }
+
+        .content-block ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-block li {
+            font-size: 1.1rem;
+            line-height: 2;
+            margin-bottom: 1rem;
+            color: #d0d0d0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .content-block li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ffffff;
+            font-size: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .highlight-box {
+            background: rgba(25,25,25,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .price-info {
+            font-size: 1.4rem;
+            color: #ffffff;
+            font-weight: 400;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid #ffffff;
+            border-radius: 8px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255,255,255,0.3);
+            background: #f0f0f0;
+        }
+
+        /* Form hover animation */
+        form {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        form:hover {
+            transform: translateY(-8px);
+            background: rgba(30,30,30,0.7) !important;
+            border-color: rgba(255,255,255,0.2) !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.1) !important;
+        }
+
+        /* Custom Select Dropdown */
+        select {
+            transition: all 0.3s ease;
+        }
+
+        select:hover {
+            border-color: rgba(255,255,255,0.4) !important;
+            background-color: rgba(0,0,0,0.7) !important;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: rgba(255,255,255,0.6) !important;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 0.8rem;
+        }
+
+        select option:hover {
+            background: #2a2a2a;
+        }
+
+        /* Custom Number Spinner */
+        .guest-selector {
+            position: relative;
+        }
+
+        .guest-input {
+            width: 100%;
+            padding: 0.9rem;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .guest-input:hover,
+        .guest-input:focus {
+            border-color: rgba(255,255,255,0.4);
+            background: rgba(0,0,0,0.7);
+        }
+
+        .guest-controls {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .guest-selector:hover .guest-controls {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .spinner-arrow {
+            padding: 0.3rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #ffffff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+        }
+
+        .spinner-arrow:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-right: none;
+            background: linear-gradient(to right, rgba(15,15,15,0), rgba(15,15,15,0.95));
+        }
+
+        .spinner-arrow:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border-left: none;
+            background: linear-gradient(to left, rgba(15,15,15,0), rgba(15,15,15,0.95));
+        }
+
+        .spinner-arrow:hover {
+            transform: scale(1.05);
+        }
+
+        .spinner-arrow:first-child:hover {
+            background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+        }
+
+        .spinner-arrow:last-child:hover {
+            background: linear-gradient(to left, rgba(255,255,255,0.05), rgba(255,255,255,0.15));
+        }
+
+        .spinner-arrow:active {
+            transform: scale(0.95);
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-5px);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #141414;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            color: #888888;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Reservation Title Hover Effect */
+        #roko-cicibela h2 {
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        #roko-cicibela h2:hover {
+            transform: translateY(-5px);
+            text-shadow: 0 8px 30px rgba(255,255,255,0.3);
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .event-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            form[action^="mailto"] > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 3rem 2rem;
+            }
+
+            .event-hero h1 {
+                font-size: 2rem;
+            }
+
+            form[action^="mailto"] {
+                padding: 2rem 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="logo.png" alt="Dujkin Dvor Logo">
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html#taste" data-hr="Okus" data-en="Taste">Okus</a></li>
+            <li><a href="index.html#atmosphere" data-hr="Atmosfera" data-en="Atmosphere">Atmosfera</a></li>
+            <li><a href="index.html#history" data-hr="Priča" data-en="Story">Priča</a></li>
+            <li><a href="index.html#reservation" data-hr="Rezervacija" data-en="Reservation">Rezervacija</a></li>
+            <li><a href="index.html#contact" data-hr="Kontakt" data-en="Contact">Kontakt</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <img src="https://flagcdn.com/w40/hr.png" alt="Hrvatski" class="lang-flag active" data-lang="hr" title="Hrvatski" onclick="switchLang('hr')">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="lang-flag" data-lang="en" title="English" onclick="switchLang('en')">
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="event-hero">
+        <div class="event-hero-content">
+            <h1 data-hr="Roko i Cicibela" data-en="Roko and Cicibela">Roko i Cicibela</h1>
+            <p class="event-date-hero" data-hr="Ručak i Predstava na Matejušci" data-en="Lunch and Performance at Matejuška">Ručak i Predstava na Matejušci</p>
+            <p class="event-date-hero" data-hr="23. Prosinca 2025. • Utorak • 12:00" data-en="December 23rd, 2025 • Tuesday • 12:00 PM">23. Prosinca 2025. • Utorak • 12:00</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="section-container">
+            <a href="index.html#events" class="btn-back" data-hr="← Natrag na događaje" data-en="← Back to events">← Natrag na događaje</a>
+            
+            <div class="content-grid">
+                <div class="content-block">
+                    <h2 data-hr="O događaju" data-en="About the Event">O događaju</h2>
+                    <p data-hr="Dana 23. prosinca na Matejušci organiziramo jedinstveni događaj — spoj gastronomije i kazališne umjetnosti u srcu Splita." data-en="On December 23rd at Matejuška, we are organizing a unique event — a fusion of gastronomy and theatrical art in the heart of Split.">
+                        Dana 23. prosinca na Matejušci organiziramo jedinstveni događaj — spoj gastronomije i kazališne umjetnosti u srcu Splita.
+                    </p>
+                    <p data-hr="Predstava 'Roko i Cicibela' izvodi se autentično na Matejušci, među barkama i ljudima, na mistu iz kojeg je Smojina priča i nastala. Ovo nije scenski prostor — ovo je stvarni ambijent Roka i Cicibele, njihov svijet." data-en="The play 'Roko and Cicibela' is performed authentically at Matejuška, among boats and people, at the very place where Smoje's story originated. This is not a stage — this is the real environment of Roko and Cicibela, their world.">
+                        Predstava 'Roko i Cicibela' izvodi se autentično na Matejušci, među barkama i ljudima, na mistu iz kojeg je Smojina priča i nastala. Ovo nije scenski prostor — ovo je stvarni ambijent Roka i Cicibele, njihov svijet.
+                    </p>
+                    <p data-hr="Ručak prati radnju predstave — servira se hrana koja se spominje u priči, jela koja su se u Splitu jela prije pola stoljeća." data-en="Lunch follows the plot of the play — food mentioned in the story is served, dishes that were eaten in Split half a century ago.">
+                        Ručak prati radnju predstave — servira se hrana koja se spominje u priči, jela koja su se u Splitu jela prije pola stoljeća.
+                    </p>
+                </div>
+
+                <div class="content-block">
+                    <h2 data-hr="Koncept" data-en="Concept">Koncept</h2>
+                    <p data-hr="Tijekom predstave poslužuju se jela poput sitne ribe, fritura, brudeta — jednostavna topla spiza koja pripovijeda o vremenu i životu na Matejušci." data-en="During the performance, dishes such as small fish, fried fish, and fish stews are served — simple hot food that tells the story of time and life at Matejuška.">
+                        Tijekom predstave poslužuju se jela poput sitne ribe, fritura, brudeta — jednostavna topla spiza koja pripovijeda o vremenu i životu na Matejušci.
+                    </p>
+                    <p data-hr="Kako predstava odmiče, mijenjaju se i jela na stolu. Gosti istovremeno doživljavaju priču i kušaju ono što se u njoj spominje — to je srž ovog koncepta." data-en="As the play progresses, the dishes on the table change. Guests simultaneously experience the story and taste what is mentioned in it — that is the essence of this concept.">
+                        Kako predstava odmiče, mijenjaju se i jela na stolu. Gosti istovremeno doživljavaju priču i kušaju ono što se u njoj spominje — to je srž ovog koncepta.
+                    </p>
+                    <p data-hr="Predstavu izvodi kazalište Ritam igre. Oni donose emociju i Smojin glas, mi donosimo okuse koji daju priči dublji smisao." data-en="The performance is by Ritam Igre theatre. They bring emotion and Smoje's voice, we bring flavors that give the story deeper meaning.">
+                        Predstavu izvodi kazalište Ritam igre. Oni donose emociju i Smojin glas, mi donosimo okuse koji daju priči dublji smisao.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Transition Text -->
+            <div style="margin-top: 5rem; margin-bottom: 2rem; text-align: center;">
+                <p data-hr="Pogledajte kako je zadnji put izgledalo:" data-en="See how it looked last time:" style="font-size: 1.3rem; color: #d0d0d0; font-weight: 600; letter-spacing: 0.5px;">
+                    <strong>Pogledajte kako je zadnji put izgledalo:</strong>
+                </p>
+            </div>
+
+            <!-- Media Section -->
+            <div style="margin-top: 3rem;">
+                <h3 data-hr="Nešto o nama u medijima" data-en="About us in the media" style="font-size: 1.5rem; color: #ffffff; font-weight: 600; text-align: center; margin-bottom: 3rem; letter-spacing: 0.5px;">
+                    <strong>Nešto o nama u medijima</strong>
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto;">
+                    <!-- Dalmatinski Portal Card -->
+                    <a href="https://dalmatinskiportal.hr/zivot/uparivanje-gastronomije-i-dramske-umjetnosti-jedinstvena-prilika-u-splitu/234387" target="_blank" rel="noopener" style="background: rgba(20,20,20,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.7); transition: all 0.3s ease; text-decoration: none; display: block;">
+                        <div style="width: 100%; height: 220px; overflow: hidden; background: url('članci/2025-04-21-13-50-551-.jpg'); background-size: cover; background-position: center;"></div>
+                        <div style="padding: 2rem;">
+                            <h3 style="color: #ffffff; font-size: 1.4rem; margin-bottom: 1rem; letter-spacing: 0.5px;">Dalmatinski portal</h3>
+                            <p data-hr="Uparivanje gastronomije i dramske umjetnosti – jedinstvena prilika u Splitu!" data-en="Pairing gastronomy and dramatic arts – a unique opportunity in Split!" style="color: #d0d0d0; font-size: 1.05rem; line-height: 1.7; font-weight: 300;">
+                                Uparivanje gastronomije i dramske umjetnosti – jedinstvena prilika u Splitu!
+                            </p>
+                        </div>
+                    </a>
+
+                    <!-- VisitSplit Card -->
+                    <a href="https://visitsplit.com/en/7263/a-three-course-dalmatian-dinner-with-the-play-roko-i-cicibela-by-ritam-igre-theatre" target="_blank" rel="noopener" style="background: rgba(20,20,20,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.7); transition: all 0.3s ease; text-decoration: none; display: block;">
+                        <div style="width: 100%; height: 220px; overflow: hidden; background: url('članci/454.jpg'); background-size: cover; background-position: center;"></div>
+                        <div style="padding: 2rem;">
+                            <h3 style="color: #ffffff; font-size: 1.4rem; margin-bottom: 1rem; letter-spacing: 0.5px;">VisitSplit</h3>
+                            <p style="color: #d0d0d0; font-size: 1.05rem; line-height: 1.7; font-weight: 300;">
+                                A Three-Course Dalmatian Dinner with the Play 'Roko i Cicibela' by Ritam Igre Theatre
+                            </p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="content-section" id="roko-cicibela" style="background-color: #141414;">
+        <div class="section-container">
+            <h2 data-hr="Rezervacija za Roko i Cicibela" data-en="Reservation for Roko and Cicibela" style="font-size: 2.5rem; margin-bottom: 3rem; color: #ffffff; text-align: center; letter-spacing: 1.5px;">Rezervacija za Roko i Cicibela</h2>
+            
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <form action="mailto:info@dujkindvor.com" method="post" enctype="text/plain" style="background: rgba(25,25,25,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.7);">
+                    <input type="hidden" name="datum" value="2025-12-23">
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 2fr 1fr 2fr; gap: 1.5rem; margin-bottom: 2rem;">
+                        <div class="guest-selector">
+                            <label data-hr="Broj osoba *" data-en="Guests *" style="display: block; color: #ffffff; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 400;">Broj osoba *</label>
+                            <div style="position: relative;">
+                                <input type="text" id="guestInput" name="broj_osoba" required readonly value="1" class="guest-input">
+                                <div class="guest-controls">
+                                    <div class="spinner-arrow" onclick="changeGuests(-1)">◄</div>
+                                    <div class="spinner-arrow" onclick="changeGuests(1)">►</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label data-hr="Ime i prezime *" data-en="Full name *" style="display: block; color: #ffffff; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 400;">Ime i prezime *</label>
+                            <input type="text" name="ime_prezime" required style="width: 100%; padding: 0.9rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #ffffff; font-size: 1rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        </div>
+                        <div>
+                            <label data-hr="Mobitel *" data-en="Phone *" style="display: block; color: #ffffff; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 400;">Mobitel *</label>
+                            <input type="tel" name="mobitel" required style="width: 100%; padding: 0.9rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #ffffff; font-size: 1rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        </div>
+                        <div>
+                            <label data-hr="Email *" data-en="Email *" style="display: block; color: #ffffff; margin-bottom: 0.5rem; font-size: 1rem; font-weight: 400;">Email *</label>
+                            <input type="email" name="email" required style="width: 100%; padding: 0.9rem; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #ffffff; font-size: 1rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" data-hr="Pošalji rezervaciju" data-en="Send reservation" style="width: 100%; margin-bottom: 1rem;">Pošalji rezervaciju</button>
+                    
+                    <p data-hr="Ova rezervacija vrijedi isključivo za događaj 23.12. – Roko i Cicibela na Matejušci." data-en="This reservation is valid exclusively for the event on 23.12. – Roko and Cicibela at Matejuška." style="text-align: center; color: #888888; font-size: 0.95rem; font-style: italic; opacity: 0.9;">
+                        Ova rezervacija vrijedi isključivo za događaj 23.12. – Roko i Cicibela na Matejušci.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentGuests = 1;
+        const MIN_GUESTS = 1;
+        const MAX_GUESTS = 12;
+
+        function changeGuests(delta) {
+            const newValue = currentGuests + delta;
+            
+            if (newValue >= MIN_GUESTS && newValue <= MAX_GUESTS) {
+                currentGuests = newValue;
+                document.getElementById('guestInput').value = currentGuests;
+            }
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dujkin Dvor. <span data-hr="Sva prava zadržana." data-en="All rights reserved.">Sva prava zadržana.</span> | <span data-hr="Razvijeno od" data-en="Developed by">Razvijeno od</span> <a href="https://www.ater.hr" target="_blank" style="color: #e9dcc8; text-decoration: none; font-weight: 500;">Ater Marketing Agency</a></p>
+    </footer>
+</body>
+</html>

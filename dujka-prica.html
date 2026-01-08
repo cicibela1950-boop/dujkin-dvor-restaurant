@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zašto Dujkin Dvor - Cijela Priča | Dujkin Dvor</title>
+    
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('[data-hr]').forEach(el => {
+                if (lang === 'hr') {
+                    el.textContent = el.getAttribute('data-hr');
+                } else {
+                    el.textContent = el.getAttribute('data-en');
+                }
+            });
+
+            document.querySelectorAll('[data-placeholder-hr]').forEach(el => {
+                if (lang === 'hr') {
+                    el.placeholder = el.getAttribute('data-placeholder-hr');
+                } else {
+                    el.placeholder = el.getAttribute('data-placeholder-en');
+                }
+            });
+
+            document.querySelectorAll('.lang-flag').forEach(flag => {
+                flag.classList.remove('active');
+            });
+            document.getElementById(lang + '-flag').classList.add('active');
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            background-color: #0a0a0a;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(20,20,20,0.9));
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px) saturate(120%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 2rem;
+        }
+
+        .logo img {
+            height: 76px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.75rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.28s ease, transform 0.28s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav a:hover {
+            color: #d0d0d0;
+            transform: translateY(-2px);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            position: absolute;
+            right: 2rem;
+        }
+
+        .lang-flag {
+            width: 42px;
+            height: 28px;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            opacity: 0.4;
+            filter: grayscale(80%) brightness(0.7);
+            border: 2px solid transparent;
+        }
+
+        .lang-flag:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .lang-flag.active {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content Sections */
+        section {
+            padding: 5rem 4rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .content-section {
+            background-color: #141414;
+            padding-top: 8rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+
+        .content-block h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+        }
+
+        .content-block h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2.5rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        .content-block p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 1.5rem;
+            color: #d0d0d0;
+            font-weight: 300;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: #ffffff;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-5px);
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .story-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: sepia(0.25) contrast(1.1) brightness(0.92);
+            transition: transform 0.5s ease;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .conclusion {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            text-align: center;
+        }
+
+        .conclusion h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+        }
+
+        .conclusion p {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #d0d0d0;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .conclusion p strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #141414;
+            padding: 3rem 4rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            color: #888888;
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .story-image img {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 3rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="logo.png" alt="Dujkin Dvor Logo">
+            </a>
+        </div>
+        <ul>
+            <li><a href="index.html#taste" data-hr="Tradicija" data-en="Tradition">Tradicija</a></li>
+            <li><a href="index.html#events" data-hr="Događaji" data-en="Events">Događaji</a></li>
+            <li><a href="index.html#atmosphere" data-hr="Meni" data-en="Menu">Meni</a></li>
+            <li><a href="index.html#reservation" data-hr="Rezervacija" data-en="Reservation">Rezervacija</a></li>
+            <li><a href="index.html#contact" data-hr="Kontakt" data-en="Contact">Kontakt</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <img src="https://flagcdn.com/w40/hr.png" alt="Hrvatski" class="lang-flag active" id="hr-flag" data-lang="hr" title="Hrvatski" onclick="switchLang('hr')">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="lang-flag" id="en-flag" data-lang="en" title="English" onclick="switchLang('en')">
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="content-section">
+        <div class="section-container">
+            <a href="index.html#taste" class="btn-back" data-hr="← Natrag na početnu" data-en="← Back to home">← Natrag na početnu</a>
+            
+            <div class="content-grid">
+                <div class="content-block">
+                    <h2 data-hr="Priča koja nije izmišljena" data-en="A story that wasn't made up">Priča koja nije izmišljena</h2>
+                    <p data-hr="Dujkin Dvor nije ime koje se izmislilo zbog zvuka. Došlo je iz priče koja je nastala na Matejušci — na mistu di je svaka barka imala svoj život, a svaka obitelj svoj ritam." data-en="Dujkin Dvor is not a name made up for its sound. It came from a story that originated in Matejuška — in a place where every boat had its own life, and every family its own rhythm.">
+                        Dujkin Dvor nije ime koje se izmislilo zbog zvuka. Došlo je iz priče koja je nastala na Matejušci — na mistu di je svaka barka imala svoj život, a svaka obitelj svoj ritam.
+                    </p>
+                    <p data-hr="Dujka je bila jedna od tih žena koje su obilježile kraj; tiha, izdržljiva i uvik tu, baš kao i samo more isprid nje." data-en="Dujka was one of those women who marked the neighborhood; quiet, enduring and always there, just like the sea in front of her.">
+                        Dujka je bila jedna od tih žena koje su obilježile kraj; tiha, izdržljiva i uvik tu, baš kao i samo more isprid nje.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="članci/stari split.jpg" alt="Stari Split - Matejuška">
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="story-image">
+                    <img src="članci/stari grad.jpg" alt="Stari Split - Grad">
+                </div>
+                <div class="content-block">
+                    <h2 data-hr="Žena koja je držala kraj" data-en="The woman who held the neighborhood together">Žena koja je držala kraj</h2>
+                    <p data-hr="Odrasla je uz ribare, težake i judi koji su znali živit s malo, ali s ponosom. Bila je žena koja se nije gurala u prvi plan, ali se o njoj znalo — po toplini, po brizi, po načinu na koji je držala kuću i kuhala spizu." data-en="She grew up with fishermen, laborers and people who knew how to live with little, but with pride. She was a woman who didn't push herself to the forefront, but people knew about her — for her warmth, her care, the way she kept house and cooked.">
+                        Odrasla je uz ribare, težake i judi koji su znali živit s malo, ali s ponosom. Bila je žena koja se nije gurala u prvi plan, ali se o njej znalo — po toplini, po brizi, po načinu na koji je držala kuću i kuhala spizu.
+                    </p>
+                    <p data-hr="Takve žene su bile središte Matejuške: držale su obitelj skupa, držale su ritam dana, i činile da sve funkcionira čak i onda kad se činilo da se sve raspada." data-en="Such women were the center of Matejuška: they kept families together, maintained the rhythm of the day, and made everything work even when it seemed like everything was falling apart.">
+                        Takve žene su bile središte Matejuške: držale su obitelj skupa, držale su ritam dana, i činile da sve funkcionira čak i onda kad se činilo da se sve raspada.
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-block">
+                    <h2 data-hr="Roko i Cicibela" data-en="Roko and Cicibela">Roko i Cicibela</h2>
+                    <p data-hr="Uz Dujku je povezana i priča o Roku i Cicibeli — o ljudima koji nisu imali puno, ali su imali jedno drugo i komad Splita koji ih je trpija, čuva i oblikova." data-en="Connected to Dujka is also the story of Roko and Cicibela — about people who didn't have much, but had each other and a piece of Split that endured them, protected them and shaped them.">
+                        Uz Dujku je povezana i priča o Roku i Cicibeli — o ljudima koji nisu imali puno, ali su imali jedno drugo i komad Splita koji ih je trpija, čuva i oblikova.
+                    </p>
+                    <p data-hr="Ta priča nije romansa iz knjige nego stvarnost starog grada: ljubav, siromaštvo, tvrdoglavost, smij i težina života, sve na jednoj istoj punti." data-en="This story is not a romance from a book but the reality of the old city: love, poverty, stubbornness, laughter and the weight of life, all at the same point.">
+                        Ta priča nije romansa iz knjige nego stvarnost starog grada: ljubav, siromaštvo, tvrdoglavost, smij i težina života, sve na jednoj istoj punti.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <img src="članci/stzaisšlčt.jpg" alt="Stara Matejuška - Roko i Cicibela">
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h2 data-hr="Zato se naš restoran zove Dujkin Dvor" data-en="That's why our restaurant is called Dujkin Dvor">Zato se naš restoran zove Dujkin Dvor</h2>
+                <p data-hr="Ne zbog mode, ne zbog turističkog imena, nego zbog onoga što želimo čuvat: duh starog Splita, običaje, poštenu kužinu i spizu koja ima svoje lice i svoje korijene." data-en="Not because of fashion, not because of a tourist name, but because of what we want to preserve: the spirit of old Split, traditions, honest cuisine and food that has its own face and roots.">
+                    Ne zbog mode, ne zbog turističkog imena, nego zbog onoga što želimo čuvat: duh starog Splita, običaje, poštenu kužinu i spizu koja ima svoje lice i svoje korijene.
+                </p>
+                <p data-hr="Kod nas se kuva na način kako se kuvavalo prije — jednostavno, iskreno i s onim istim mirom koji je nekad držao kuće na Matejušci." data-en="We cook the way it was cooked before — simply, honestly and with the same peace that once held the houses in Matejuška.">
+                    Kod nas se kuva na način kako se kuvavalo prije — jednostavno, iskreno i s onim istim mirom koji je nekad držao kuće na Matejušci.
+                </p>
+                <p data-hr="Dujkin Dvor je mali podsjetnik da Split nije samo grad i kulisa — nego priče, ljudi i vrime koje je oblikovalo sve šta se danas zove 'dalmatinski život'." data-en="Dujkin Dvor is a small reminder that Split is not just a city and a backdrop — but stories, people and time that shaped everything that is now called 'Dalmatian life'.">
+                    Dujkin Dvor je mali podsjetnik da Split nije samo grad i kulisa — nego priče, ljudi i vrime koje je oblikovalo sve šta se danas zove "dalmatinski život".
+                </p>
+                <p><strong data-hr="Mi samo držimo tu nit živom." data-en="We just keep that thread alive.">Mi samo držimo tu nit živom.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dujkin Dvor. <span data-hr="Sva prava zadržana." data-en="All rights reserved.">Sva prava zadržana.</span> | <span data-hr="Razvijeno od" data-en="Developed by">Razvijeno od</span> <a href="https://www.ater.hr" target="_blank" style="color: #e9dcc8; text-decoration: none; font-weight: 500;">Ater Marketing Agency</a></p>
+    </footer>
+</body>
+</html>

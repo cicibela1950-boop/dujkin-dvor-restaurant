@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Dujkin Dvor - Restoran</title>
+    <!-- Version: 1.2.4 - Steam animations added -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Language switching - defined early so onclick works
+        let currentLang = 'hr';
+
+        function switchLang(lang) {
+            currentLang = lang;
+            
+            // Update flag states
+            document.querySelectorAll('.lang-flag').forEach(flag => {
+                flag.classList.remove('active');
+                if (flag.dataset.lang === lang) {
+                    flag.classList.add('active');
+                }
+            });
+
+            // Update all text elements
+            document.querySelectorAll('[data-hr]').forEach(el => {
+                const hrText = el.getAttribute('data-hr');
+                const enText = el.getAttribute('data-en');
+                
+                if (hrText && enText) {
+                    el.textContent = lang === 'hr' ? hrText : enText;
+                }
+            });
+
+            // Update input placeholders separately
+            document.querySelectorAll('input[data-placeholder-hr]').forEach(input => {
+                const hrPlaceholder = input.getAttribute('data-placeholder-hr');
+                const enPlaceholder = input.getAttribute('data-placeholder-en');
+                
+                if (hrPlaceholder && enPlaceholder) {
+                    input.placeholder = lang === 'hr' ? hrPlaceholder : enPlaceholder;
+                }
+            });
+
+            // Update gallery caption
+            const caption = document.querySelector('.rotating-gallery .caption');
+            if (caption) {
+                caption.textContent = lang === 'hr' ? 'Božić u Dujkinom dvoru' : 'Christmas at Dujkin Dvor';
+            }
+
+            // Update HTML lang
+            document.documentElement.lang = lang;
+        }
+
+        // Guest number spinner for main page
+        let currentGuestsMain = 1;
+        const MIN_GUESTS_MAIN = 1;
+        const MAX_GUESTS_MAIN = 20;
+
+        function changeGuestsMain(delta) {
+            const newValue = currentGuestsMain + delta;
+            if (newValue >= MIN_GUESTS_MAIN && newValue <= MAX_GUESTS_MAIN) {
+                currentGuestsMain = newValue;
+                document.getElementById('guestInput').value = currentGuestsMain;
+            }
+        }
+
+        let currentGuestsHero = 1;
+        const MIN_GUESTS_HERO = 1;
+        const MAX_GUESTS_HERO = 20;
+
+        function changeGuestsHero(delta) {
+            const newValue = currentGuestsHero + delta;
+            if (newValue >= MIN_GUESTS_HERO && newValue <= MAX_GUESTS_HERO) {
+                currentGuestsHero = newValue;
+                document.getElementById('heroGuestInput').value = currentGuestsHero;
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Culinary steam particles for restaurant ambiance -->
+    <div class="steam-particle steam-1"></div>
+    <div class="steam-particle steam-2"></div>
+    <div class="steam-particle steam-3"></div>
+    <div class="steam-particle steam-4"></div>
+    <div class="steam-particle steam-5"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="index.html" style="display: flex; align-items: center; text-decoration: none;">
+                <img src="logo.png" alt="Dujkin Dvor Logo">
+            </a>
+        </div>
+        <ul>
+            <li><a href="#taste" data-hr="Tradicija" data-en="Tradition">Tradicija</a></li>
+            <li><a href="#events" data-hr="Događaji" data-en="Events">Događaji</a></li>
+            <li><a href="#atmosphere" data-hr="Meni" data-en="Menu">Meni</a></li>
+            <li><a href="#reservation" data-hr="Rezervacija" data-en="Reservation">Rezervacija</a></li>
+            <li><a href="#contact" data-hr="Kontakt" data-en="Contact">Kontakt</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <img src="https://flagcdn.com/w40/hr.png" alt="Hrvatski" class="lang-flag active" data-lang="hr" title="Hrvatski" onclick="switchLang('hr')">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="lang-flag" data-lang="en" title="English" onclick="switchLang('en')">
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg hero-bg-1 visible" aria-hidden="true" style="background-image: url('DSC06248.jpg')"></div>
+        <div class="hero-bg hero-bg-2" aria-hidden="true" style="background-image: url('slikr/DSC08391.jpg')"></div>
+        <div class="hero-arrow left">‹</div>
+        <div class="hero-arrow right">›</div>
+        <div class="hero-content">
+            <h1 class="hero-title">Dujkin Dvor</h1>
+            <p class="hero-subtitle"></p>
+            <div id="heroCTA" style="margin: 1.5rem 0;"></div>
+        </div>
+    </section>
+
+    <!-- Taste Section -->
+    <section class="taste" id="taste">
+        <div class="section-container">
+            <div class="taste-content">
+                <div class="taste-text">
+                    <h3 data-hr="Okus Tradicije" data-en="Taste of Tradition">Okus Tradicije</h3>
+                    <p data-hr="Ime Dujkin Dvor dolazi iz stare splitske priče o Dujki — ženi koja je na Matejuški bila simbol jednostavnog, poštenog života i spize kakva se tu oduvik radila. Ta ideja doma, topline i stare splitske kužine vodi nas i danas u svemu šta radimo." data-en="The name Dujkin Dvor comes from an old Split story about Dujka — a woman who in Matejuška was a symbol of simple, honest life and the food that was always made there. This idea of home, warmth and old Split cuisine guides us today in everything we do.">Ime Dujkin Dvor dolazi iz stare splitske priče o Dujki — ženi koja je na Matejuški bila simbol jednostavnog, poštenog života i spize kakva se tu oduvik radila. Ta ideja doma, topline i stare splitske kužine vodi nas i danas u svemu šta radimo.</p>
+                    <a href="dujka-prica.html" class="btn-primary" data-hr="Zašto Dujkin Dvor – cijela priča" data-en="Why Dujkin Dvor – the full story" style="display: inline-block; text-decoration: none; margin-top: 1.5rem;">Zašto Dujkin Dvor – cijela priča</a>
+                </div>
+                <div class="taste-image retro-image">
+                    <img src="članci/roko1.jpg" alt="Stara Matejuška" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; filter: sepia(0.3) contrast(1.1) brightness(0.95); box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Events Section -->
+    <section class="events" id="events">
+        <div class="section-container">
+            <div class="events-content">
+                <div class="event-card">
+                    <div class="event-card-image">
+                        <img src="slike1/predstava.jpg" alt="Roko i Cicibela - Specijalni Događaj">
+                    </div>
+                    <div class="event-card-content">
+                        <span class="event-badge" data-hr="Specijalni Događaj" data-en="Special Event">Specijalni Događaj</span>
+                        <h3 data-hr="Roko i Cicibela – Ručak i Predstava na Matejušci" data-en="Roko and Cicibela – Lunch and Performance at Matejuška">Roko i Cicibela – Ručak i Predstava na Matejušci</h3>
+                        <p class="event-date" data-hr="23. Prosinca 2025., Utorak - 12:00" data-en="December 23rd, 2025, Tuesday - 12:00 PM">23. Prosinca 2025., Utorak - 12:00</p>
+                        <p data-hr="Radimo poseban događaj na Matejušci: izvedba 'Roka i Cicibele' uz ručak koji se poslužuje direktno iz Dujkinog Dvora." data-en="We're organizing a special event at Matejuška: a performance of 'Roko and Cicibela' with lunch served directly from Dujkin Dvor.">Radimo poseban događaj na Matejušci: izvedba 'Roka i Cicibele' uz ručak koji se poslužuje direktno iz Dujkinog Dvora.</p>
+                        <p data-hr="Tijekom predstave poslužuju se jela koja su se jela u Splitu prije više od pola stoljeća i koja se spominju u samoj priči — to je glavni štos ovog događaja. Priča ide svojim tokom, a pjat prati ono što se događa na sceni." data-en="During the performance, dishes that were eaten in Split more than half a century ago and mentioned in the story itself are served — that's the main highlight of this event. The story unfolds, and the plate follows what's happening on stage.">Tijekom predstave poslužuju se jela koja su se jela u Splitu prije više od pola stoljeća i koja se spominju u samoj priči — to je glavni štos ovog događaja. Priča ide svojim tokom, a pjat prati ono što se događa na sceni.</p>
+                        <p data-hr="Doživite autentičnu splitsku priču kroz okuse koji su dio naše povijesti i kulture. Ograničen broj mjesta!" data-en="Experience an authentic Split story through flavors that are part of our history and culture. Limited seats available!">Doživite autentičnu splitsku priču kroz okuse koji su dio naše povijesti i kulture. Ograničen broj mjesta!</p>
+                        <div class="event-cta">
+                            <a href="roko-cicibela.html" class="btn-primary" data-hr="Više o događaju" data-en="More about the event">Više o događaju</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atmosphere Section -->
+    <section class="atmosphere" id="atmosphere">
+        <div class="section-container">
+            <div class="atmosphere-content" style="display: flex; align-items: center; justify-content: center; min-height: 50vh;">
+                <div style="text-align: center; max-width: 700px; padding: 2rem;">
+                    <p style="font-size: 1.35rem; line-height: 2.2; color: #f5f5f5; margin-bottom: 3rem; font-weight: 300; text-shadow: 0 4px 16px rgba(0,0,0,0.9); font-style: italic; letter-spacing: 0.5px;">
+                        <span data-hr="Kuhamo ono što je oduvik držalo Split — spizu koja je jednostavna, poštena i napravljena s mjerom. Bez skrivanja iza trendova, bez pretjerivanja. Samo pravi dalmatinski okusi i način koji se nije minja desetljećima." data-en="We cook what has always kept Split going — food that is simple, honest and made with measure. No hiding behind trends, no exaggeration. Just real Dalmatian flavors and a way that hasn't changed in decades.">
+                            Kuhamo ono što je oduvik držalo Split — spizu koja je jednostavna, poštena i napravljena s mjerom. Bez skrivanja iza trendova, bez pretjerivanja. Samo pravi dalmatinski okusi i način koji se nije minja desetljećima.
+                        </span>
+                    </p>
+                    <a href="meni/DUJKIN DVOR MENI - 2025.pdf.pdf" target="_blank" class="menu-btn">
+                        <span data-hr="MENI" data-en="MENU">MENI</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation-section" id="reservation">
+        <div class="section-container">
+            <h2 data-hr="Rezerviraj Svoj Stol" data-en="Reserve Your Table">Rezerviraj Svoj Stol</h2>
+            <p class="subtitle" data-hr="Osiguraj si mjesto za nezaboravan doživljaj" data-en="Secure your place for an unforgettable experience">Osiguraj si mjesto za nezaboravan doživljaj</p>
+            
+            <div class="reservation-container">
+                <form class="reservation-form" id="reservationForm">
+                    <div class="form-row">
+                        <div class="guest-selector">
+                            <div style="position: relative;">
+                                <input type="text" id="guestInput" name="broj_osoba" required readonly value="1" class="guest-input" placeholder="Broj osoba" data-placeholder-hr="Broj osoba" data-placeholder-en="Number of guests">
+                                <div class="guest-controls">
+                                    <div class="spinner-arrow" onclick="changeGuestsMain(-1)">◄</div>
+                                    <div class="spinner-arrow" onclick="changeGuestsMain(1)">►</div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="date" id="resDate" required>
+                        <input type="time" id="resTime" required>
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="lastName" placeholder="Prezime" data-placeholder-hr="Prezime" data-placeholder-en="Last name" required>
+                        <input type="email" id="email" placeholder="Email" data-placeholder-hr="Email" data-placeholder-en="Email" required>
+                    </div>
+                    <button type="submit" class="btn-primary" data-hr="Pošalji Rezervaciju" data-en="Submit Reservation" style="width: 100%; padding: 1rem;">Pošalji Rezervaciju</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 data-hr="Pronađite nas u srcu Splita" data-en="Find us in the heart of Split">Pronađite nas u srcu Splita</h2>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3 data-hr="Kontakt" data-en="Contact">Kontakt</h3>
+                        <p>
+                            <a href="tel:+38521355364">021 355 364</a><br>
+                            <a href="mailto:info@dujkindvor.com">info@dujkindvor.com</a>
+                        </p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h3 data-hr="Radno Vrijeme" data-en="Opening Hours">Radno Vrijeme</h3>
+                        <p data-hr="Svaki dan: 08:30 - 23:00" data-en="Every day: 08:30 - 23:00">Svaki dan: 08:30 - 23:00</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h3 data-hr="Lokacija" data-en="Location">Lokacija</h3>
+                        <p>
+                            Trumbićeva obala 6<br>
+                            21000 Split, <span data-hr="Hrvatska" data-en="Croatia">Hrvatska</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.8960471!2d16.4380861!3d43.5087623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13355dff6e11e091%3A0x9c5e3b8a0e7c6d5f!2sDujkin%20Dvor%2C%20Ul.%20Don%20Frane%20Buli%C4%87a%203%2C%2021000%2C%20Split!5e0!3m2!1shr!2shr!4v1732727000000!5m2!1shr!2shr" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="social-icons" style="justify-content: center; margin-top: 2rem;">
+                    <a href="https://www.instagram.com/dujkindvor/" target="_blank" aria-label="Instagram" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/dujkindvor?locale=hr_HR" target="_blank" aria-label="Facebook" class="social-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Dujkin Dvor. <span data-hr="Sva prava zadržana." data-en="All rights reserved.">Sva prava zadržana.</span> | <span data-hr="Razvijeno od" data-en="Developed by">Razvijeno od</span> <a href="https://www.ater.hr" target="_blank" style="color: #e9dcc8; text-decoration: none; font-weight: 500;">Ater Marketing Agency X GINTECH</a></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    <script>
+        // Scroll to top on page load/refresh
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // Initialize EmailJS
+        emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation for Atmosphere section
+        const atmosphereObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        // Observe atmosphere elements
+        window.addEventListener('load', () => {
+            const atmosphereImage = document.querySelector('.atmosphere-image');
+            const atmosphereText = document.querySelector('.atmosphere-text');
+            
+            if (atmosphereImage) atmosphereObserver.observe(atmosphereImage);
+            if (atmosphereText) atmosphereObserver.observe(atmosphereText);
+        });
+
+        // Reservation Form Submission (Main section)
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inputs = this.querySelectorAll('input');
+            const [gosti, datum, vrijeme, prezime, email] = Array.from(inputs).map(inp => inp.value);
+
+            const templateParams = {
+                to_email: "info@dujkindvor.com",
+                from_email: email,
+                guest_name: prezime,
+                num_guests: gosti,
+                reservation_date: datum,
+                reservation_time: vrijeme,
+                guest_email: email
+            };
+
+            emailjs.send('service_YOUR_SERVICE_ID', 'template_YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    const successMsg = currentLang === 'hr' 
+                        ? 'Rezervacija je uspješno primljena! Uskoro ćemo potvrditi vašu rezervaciju.'
+                        : 'Reservation successfully received! We will confirm your reservation soon.';
+                    alert(successMsg);
+                    document.getElementById('reservationForm').reset();
+                }, function(error) {
+                    const errorMsg = currentLang === 'hr'
+                        ? 'Greška pri slanju rezervacije. Pokušajte ponovno.'
+                        : 'Error sending reservation. Please try again.';
+                    alert(errorMsg);
+                    console.log('EmailJS Error:', error);
+                });
+        });
+
+        // Reservation Form Submission (Hero section)
+        document.getElementById('heroReservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const gosti = document.getElementById('heroGuestInput').value;
+            const datum = document.getElementById('heroResDate').value;
+            const vrijeme = document.getElementById('heroResTime').value;
+            const prezime = document.getElementById('heroLastName').value;
+            const email = document.getElementById('heroEmail').value;
+
+            const templateParams = {
+                to_email: "info@dujkindvor.com",
+                from_email: email,
+                guest_name: prezime,
+                num_guests: gosti,
+                reservation_date: datum,
+                reservation_time: vrijeme,
+                guest_email: email
+            };
+
+            emailjs.send('service_YOUR_SERVICE_ID', 'template_YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    const successMsg = currentLang === 'hr' 
+                        ? 'Rezervacija je uspješno primljena! Uskoro ćemo potvrditi vašu rezervaciju.'
+                        : 'Reservation successfully received! We will confirm your reservation soon.';
+                    alert(successMsg);
+                    document.getElementById('heroReservationForm').reset();
+                    document.getElementById('heroGuestInput').value = 1;
+                    currentGuestsHero = 1;
+                }, function(error) {
+                    const errorMsg = currentLang === 'hr'
+                        ? 'Greška pri slanju rezervacije. Pokušajte ponovno.'
+                        : 'Error sending reservation. Please try again.';
+                    alert(errorMsg);
+                    console.log('EmailJS Error:', error);
+                });
+        });
+    </script>
+    <script>
+        /* Rotating gallery script
+           Usage:
+           - Replace the items in `galleryImages` with either:
+             * direct public URLs to images (recommended), e.g. Google Drive 'direct' links
+               (use the file's share URL converted to a direct image URL: https://drive.google.com/uc?export=view&id=FILE_ID)
+             * or local paths relative to this HTML file, e.g. 'images/events/DSC08400.jpg'
+           - The gallery will cycle automatically with a fade transition.
+        */
+
+        (function(){
+            const gallery = document.getElementById('eventsGallery');
+            if (!gallery) return;
+
+            // Images loaded from the local `slikr/` folder in the workspace.
+            const galleryImages = [
+                'slikr/DSC08391.jpg',
+                'slikr/DSC08392.jpg',
+                'slikr/DSC08398.jpg',
+                'slikr/DSC08400.jpg',
+                'slikr/DSC08405.jpg',
+                'slikr/DSC08408.jpg',
+                'slikr/DSC08414.jpg',
+                'slikr/DSC08424.jpg',
+                'slikr/DSC08432.jpg',
+                'slikr/DSC08446.jpg',
+                'slikr/DSC08459.jpg',
+                'slikr/DSC08471.jpg',
+                'slikr/DSC08488.jpg',
+                'slikr/DSC08505.jpg',
+                'slikr/DSC08540.jpg'
+            ];
+
+            // create slides
+            const slides = [];
+            galleryImages.forEach((src, i) => {
+                const el = document.createElement('div');
+                el.className = 'slide' + (i === 0 ? ' active' : '');
+                el.style.backgroundImage = `url("${src}")`;
+                el.dataset.caption = '';
+                gallery.appendChild(el);
+                slides.push(el);
+            });
+
+            if (slides.length === 0) {
+                gallery.style.display = 'none';
+                return;
+            }
+
+            let current = 0;
+            function goTo(next) {
+                if (next === current) return;
+                slides[current].classList.remove('active');
+                slides[next].classList.add('active');
+                current = next;
+                const cap = slides[current].dataset.caption || 'Božić u Dujkinom dvoru';
+                const captionEl = gallery.querySelector('.caption');
+                if (captionEl) captionEl.textContent = cap;
+            }
+
+            // autoplay with pause-on-hover
+            const INTERVAL_MS = 3600;
+            let timer = null;
+            function startAuto() {
+                stopAuto();
+                timer = setInterval(() => {
+                    goTo((current + 1) % slides.length);
+                }, INTERVAL_MS);
+            }
+            function stopAuto(){ if (timer) { clearInterval(timer); timer = null; } }
+
+            gallery.addEventListener('mouseenter', () => stopAuto());
+            gallery.addEventListener('mouseleave', () => startAuto());
+
+            // keyboard navigation when focused
+            gallery.tabIndex = 0;
+            gallery.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') goTo((current - 1 + slides.length) % slides.length);
+                if (e.key === 'ArrowRight') goTo((current + 1) % slides.length);
+            });
+
+            // start
+            startAuto();
+        })();
+    </script>
+        <script>
+            // Hero crossfade + text swap for event highlight
+            (function(){
+                const hero = document.querySelector('.hero');
+                if (!hero) {
+                    console.error('Hero section not found!');
+                    return;
+                }
+
+                const bgA = hero.querySelector('.hero-bg-1');
+                const bgB = hero.querySelector('.hero-bg-2');
+                const titleEl = hero.querySelector('.hero-title');
+                const subEl = hero.querySelector('.hero-subtitle');
+                const leftArrow = hero.querySelector('.hero-arrow.left');
+                const rightArrow = hero.querySelector('.hero-arrow.right');
+                const ctaContainer = hero.querySelector('#heroCTA');
+                const heroForm = hero.querySelector('.hero-reservation-form');
+
+                console.log('Hero elements:', { bgA, bgB, titleEl, subEl, leftArrow, rightArrow, ctaContainer, heroForm });
+
+                if (!bgA || !bgB || !titleEl || !subEl) {
+                    console.error('Missing hero elements!');
+                    return;
+                }
+
+                const slides = [
+                    {
+                        img: 'DSC06248.jpg',
+                        title: 'Dujkin Dvor',
+                        subtitle: 'Autentična dalmatinska kuhinja u srcu Splita',
+                        showButton: true,
+                        buttonText: 'Rezerviraj',
+                        buttonLink: '#reservation',
+                        showForm: false
+                    },
+                    {
+                        img: 'slikr/DSC08391.jpg',
+                        title: 'ROKO I CICIBELA',
+                        subtitle: 'Specijalni događaj — predstava uz ručak na Matejušci',
+                        showButton: true,
+                        buttonText: 'Naruči odmah',
+                        buttonLink: '#events',
+                        showForm: false
+                    },
+                    {
+                        img: 'članci/gglovo.jpg',
+                        title: 'NARUČITE DOSTAVU',
+                        subtitle: 'Brza dostava iz Dujkinog Dvora putem Glovo aplikacije',
+                        showButton: true,
+                        buttonText: 'Naruči na Glovo',
+                        buttonLink: 'https://glovoapp.com/hr/hr/split/dujkin-dvor-spl/',
+                        showForm: false
+                    }
+                ];
+
+                // ensure both backgrounds exist
+                if (!bgA || !bgB || !titleEl || !subEl) return;
+
+                let current = 0; // index of visible slide
+                const defaultButtons = ''; // store original buttons (empty since we add the container)
+                
+                // initialize - ensure first background is visible
+                bgA.style.backgroundImage = `url("${slides[0].img}")`;
+                bgB.style.backgroundImage = `url("${slides[1].img}")`;
+                bgA.classList.add('visible');
+                bgB.classList.remove('visible');
+                titleEl.textContent = slides[0].title;
+                subEl.textContent = slides[0].subtitle;
+                subEl.style.display = 'block';
+                
+                // Initialize first slide button
+                if (slides[0].showButton) {
+                    const target = slides[0].buttonLink.startsWith('#') ? '_self' : '_blank';
+                    ctaContainer.innerHTML = `<a href="${slides[0].buttonLink}" target="${target}" class="btn-primary" data-hr="${slides[0].buttonText}" data-en="${slides[0].buttonText}" style="text-decoration: none; display: inline-block; padding: 1rem 3rem; margin-top: 1.5rem;">${slides[0].buttonText}</a>`;
+                }
+                
+                // Show/hide form based on first slide
+                if (heroForm) {
+                    heroForm.style.display = slides[0].showForm ? 'block' : 'none';
+                }
+                
+                console.log('Hero slideshow initialized. Interval: 8 seconds');
+
+                function showIndex(next) {
+                    if (next === current) return;
+                    console.log(`Switching from slide ${current} to slide ${next}`);
+                    
+                    // Determine which background to show and which to hide
+                    // We alternate between bgA and bgB
+                    const isCurrentOnA = (current % 2 === 0);
+                    const showBg = isCurrentOnA ? bgB : bgA;
+                    const hideBg = isCurrentOnA ? bgA : bgB;
+
+                    // set next image in the background we will show
+                    showBg.style.backgroundImage = `url("${slides[next].img}")`;
+
+                    // trigger crossfade
+                    showBg.classList.add('visible');
+                    hideBg.classList.remove('visible');
+
+                    // update texts with a small delay to sync with fade
+                    setTimeout(() => {
+                        titleEl.classList.add('fade-text');
+                        subEl.classList.add('fade-text');
+                        setTimeout(() => {
+                            titleEl.textContent = slides[next].title;
+                            subEl.textContent = slides[next].subtitle;
+                            subEl.style.display = 'block';
+                            titleEl.classList.remove('fade-text');
+                            subEl.classList.remove('fade-text');
+                            
+                            // Update buttons based on slide
+                            if (slides[next].showButton) {
+                                const target = slides[next].buttonLink.startsWith('#') ? '_self' : '_blank';
+                                ctaContainer.innerHTML = `<a href="${slides[next].buttonLink}" target="${target}" class="btn-primary" data-hr="${slides[next].buttonText}" data-en="${slides[next].buttonText}" style="text-decoration: none; display: inline-block; padding: 1rem 3rem; margin-top: 1.5rem;">${slides[next].buttonText}</a>`;
+                            } else {
+                                ctaContainer.innerHTML = defaultButtons;
+                            }
+                            
+                            // Show/hide form based on slide
+                            if (heroForm) {
+                                heroForm.style.display = slides[next].showForm ? 'block' : 'none';
+                            }
+                        }, 280);
+                    }, 260);
+
+                    current = next;
+                }
+
+                // add minimal text fade CSS via JS to avoid touching too many CSS rules
+                const style = document.createElement('style');
+                style.textContent = `
+                    .fade-text { opacity: 0; transform: translateY(6px); transition: opacity .6s ease, transform .6s ease; }
+                `;
+                document.head.appendChild(style);
+
+                // cycle every 8 seconds strictly
+                const INTERVAL = 8000;
+                let timer = setInterval(() => {
+                    showIndex((current + 1) % slides.length);
+                }, INTERVAL);
+
+                // pause on hover
+                hero.addEventListener('mouseenter', () => clearInterval(timer));
+                hero.addEventListener('mouseleave', () => { 
+                    clearInterval(timer);
+                    timer = setInterval(() => { showIndex((current + 1) % slides.length); }, INTERVAL); 
+                });
+
+                // Arrow navigation with infinite loop
+                function goToSlide(index) {
+                    clearInterval(timer);
+                    showIndex(index);
+                    timer = setInterval(() => { showIndex((current + 1) % slides.length); }, INTERVAL);
+                }
+
+                if (leftArrow) {
+                    leftArrow.addEventListener('click', () => {
+                        console.log('Left arrow clicked');
+                        const prevIndex = (current - 1 + slides.length) % slides.length;
+                        goToSlide(prevIndex);
+                    });
+                }
+
+                if (rightArrow) {
+                    rightArrow.addEventListener('click', () => {
+                        console.log('Right arrow clicked');
+                        const nextIndex = (current + 1) % slides.length;
+                        goToSlide(nextIndex);
+                    });
+                }
+
+            })();
+        </script>
+</body>
+</html>
